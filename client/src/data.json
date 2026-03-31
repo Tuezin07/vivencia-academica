@@ -1,0 +1,60 @@
+{
+  "idade": {
+    "17-18": 30,
+    "19-20": 2
+  },
+  "genero": {
+    "Masculino": 23,
+    "Feminino": 8,
+    "Outro": 1
+  },
+  "primeira_opcao": {
+    "Sim": 19,
+    "Não": 13
+  },
+  "adaptacao": {
+    "Fácil": 15,
+    "Moderada": 12,
+    "Muito fácil": 5
+  },
+  "dificuldade": {
+    "Médio": 19,
+    "Fácil": 11,
+    "Muito fácil": 2
+  },
+  "acompanhamento": {
+    "Sim, totalmente": 19,
+    "Na maioria das vezes": 12,
+    "Às vezes": 1
+  },
+  "maior_dificuldade": {
+    "Fazer amizades": 8,
+    "Conteúdo das matérias": 7,
+    "Organização do tempo": 6,
+    "Nenhuma dificuldade": 6,
+    "Ansiedade ou pressão": 5
+  },
+  "relacionamento": {
+    "Bom": 15,
+    "Regular": 8,
+    "Muito bom": 5,
+    "Ruim": 4
+  },
+  "motivacao": {
+    "Motivado": 21,
+    "Muito motivado": 10,
+    "Pouco motivado": 1
+  },
+  "organizacao_tempo": {
+    "Sim": 17,
+    "Mais ou menos": 12,
+    "Não": 3
+  },
+  "horas_estudo": {
+    "Até 1 hora": 15,
+    "Não estudo fora da aula": 8,
+    "1-2 horas": 7,
+    "Mais de 2 horas": 2
+  },
+  "total_respostas": 32
+}
