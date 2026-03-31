@@ -113,5 +113,4 @@ client/public/__manus__/version.json
 
 node_modules
 dist
-.env
 .DS_Store
