@@ -23,37 +23,71 @@ async function startServer() {
   app.use(express.static(staticPath));
 
   // ============================================
-  // ROTAS DA API - Coloque todas as suas rotas aqui
+  // ROTAS DA API
   // ============================================
 
-  // Exemplo: Rota para dados dos calouros
+  // Rota para receber logs (evita erro 404)
+  app.post("/logs", (req, res) => {
+    // Apenas aceita o log, não faz nada com ele
+    console.log("Log recebido:", req.body);
+    res.json({ success: true });
+  });
+
+  app.post("/__manus__/logs", (req, res) => {
+    console.log("Manus log recebido");
+    res.json({ success: true });
+  });
+
+  // Rota para dados dos calouros (ajuste conforme necessário)
   app.get("/api/dados", (_req, res) => {
     try {
-      // Tenta ler o arquivo data.json se existir
       const dataPath = path.resolve(__dirname, "..", "client", "src", "data.json");
       if (fs.existsSync(dataPath)) {
         const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
         res.json(data);
       } else {
-        // Dados de exemplo caso não exista o arquivo
+        // Dados de exemplo
         res.json({
-          message: "Dados carregados com sucesso!",
-          data: {
-            calouros: 150,
-            cursos: 12,
-            eventos: 8
+          calouros: [
+            { id: 1, nome: "João Silva", curso: "Engenharia", nota: 85, frequencia: 90 },
+            { id: 2, nome: "Maria Santos", curso: "Medicina", nota: 92, frequencia: 95 },
+            { id: 3, nome: "Pedro Oliveira", curso: "Direito", nota: 78, frequencia: 85 }
+          ],
+          estatisticas: {
+            totalCalouros: 150,
+            mediaNotas: 84.5,
+            taxaAprovacao: 78,
+            cursos: 12
           }
         });
       }
     } catch (error) {
-      console.error("Erro ao ler dados:", error);
       res.status(500).json({ error: "Erro ao carregar dados" });
     }
   });
 
-  // Rota de teste para verificar se a API está funcionando
+  // Rota para estatísticas
+  app.get("/api/estatisticas", (_req, res) => {
+    res.json({
+      total: 150,
+      media: 84.5,
+      aprovados: 117,
+      reprovados: 33
+    });
+  });
+
+  // Rota de teste
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  // Rota coringa para qualquer /api/*
+  app.get("/api/*", (req, res) => {
+    res.json({ 
+      message: "API endpoint", 
+      path: req.path,
+      status: "ok" 
+    });
   });
 
   // ============================================
@@ -69,7 +103,7 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
-    console.log(`API health check: http://localhost:${port}/api/health`);
+    console.log(`API health: http://localhost:${port}/api/health`);
   });
 }
 
